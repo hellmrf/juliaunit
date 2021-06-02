@@ -1,8 +1,8 @@
-# `juliaunit`
+# juliaunit
 
 LaTeX package to integrate Julia units and calculations (almost) seamlessly.
 
-> This package has a long work until it first stable release, so use by your risk.
+> This package has a long work until it first stable release, so use it by your own risk.
 
 ## Features
 
@@ -12,7 +12,7 @@ You can:
 
 -   Do calculation directly in Julia and typeset the result
 -   Convert units in the pipe fashion
--   Print the value and the unit of anu `Unitful.Quantity`
+-   Print the value and the unit of any `Unitful.Quantity`
 -   Choose the number of de![](../screenshots/example1.png)cimal places
 -   Force scientific notation
 
@@ -66,9 +66,9 @@ Again, you can replace `xelatex` with any engine of your choice (see arara's doc
 
     $ V = \jlunit{V} $, or, in the SI, $ V = \jlunit{V |> upreferred} $. Or maybe in liter, $ V = \jlunit{V |> u"L"} $.
 
-    If you prefer to use less decimal places, you can just $ V = \jlunit[2]{V |> u"L"} $. Or maybe you want to force scientific notation: $ V = \jlunit[2][true]{V |> upreferred} $.
+    If you prefer to use less decimal places, you can just do $ V = \jlunit[2]{V |> u"L"} $. Or maybe you want to force scientific notation: $ V = \jlunit[2][true]{V |> upreferred} $.
 
-    To force scientific notation and use all available decimal places, pass -1 to the first optional argument, like this $ V = \jlunit[-1][true]{V |> upreferred} $.
+    To force scientific notation and use all available decimal places, pass $ -1 $ to the first optional argument, like this $ V = \jlunit[-1][true]{V |> upreferred} $.
 \end{document}
 ```
 
@@ -77,13 +77,13 @@ And the result:
 
 ## How it works
 
-This package actually hasn't nothing really new. It uses `pythontex` to run Julia from LaTeX, [Latexify.jl](https://github.com/korsbo/Latexify.jl) and [UnitfulLatexify.jl](https://github.com/gustaphe/UnitfulLatexify.jl) to print unities in LaTeX format. However, it lets you focus on your text and forget all these connections.
+This package actually hasn't nothing really new. It uses `pythontex` to run Julia from LaTeX, and [Latexify.jl](https://github.com/korsbo/Latexify.jl) and [UnitfulLatexify.jl](https://github.com/gustaphe/UnitfulLatexify.jl) to print unities in LaTeX format. However, it lets you focus on your text and forget all these connections.
 
 ## Contributing
 
 Any contribution is welcome. The project is structured in two main files, `juliaunit_template.sty` that provides LaTeX interface, and a `juliaunit.jl` that is the Julia side. However, the actual usable file is `juliaunit.sty`, which contains LaTeX and Julia code and is produced running `generate_sty.jl`.
 
-To contribute, fork the repo, clone, and make your changes. Then run `generate_sty.jl`. Copy or symlink `juliaunit.jl` to your `texmf` or project folder. Test and submit your pull request!
+To contribute, fork the repo, clone, and make your changes. Then run `generate_sty.jl`. Copy or symlink `juliaunit.sty` to your `texmf` or project folder. Test and submit your pull request!
 
 ## License
 
