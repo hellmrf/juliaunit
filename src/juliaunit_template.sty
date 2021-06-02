@@ -1,0 +1,109 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{juliaunit}[2018/01/01 Example LaTeX package]
+
+\ExplSyntaxOn
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Process Package Options %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*{\loadPythonTeX}{\RequirePackage[usefamily={julia,jl}]{pythontex}}
+% Option `donotloadpythontex'
+% It's here because, sometimes, you want to use Python or another language alongside with
+% Julia. In this case, you load the package manually. It's easier than hacking with xparse
+% and \PassOptionsToPackage{}.
+\DeclareOption{donotloadpythontex}{
+    \PackageWarningNoLine{juliaunit}{You~passed~`donotloadpythontex'~to~juliaunit.~It~means~that~you~MUST~import~pythontex~by~yourself,~including~at~least~`julia'~and~`jl'~families,~otherwise~it'll~fail.~E.g:~\token_to_str:c{usepackage}[usefamily={julia,jl}]{pythontex}.}
+    \renewcommand*{\loadPythonTeX}{\relax}
+}
+\DeclareOption*{\PackageWarning{juliaunit}{Unknown~`\CurrentOption'.~ I~ will~ ignore~ it.}}
+\ProcessOptions\relax
+
+\RequirePackage{siunitx}
+\loadPythonTeX
+
+
+\ExplSyntaxOff
+
+%%%%%%%%%%%%%%
+% Julia side %
+%%%%%%%%%%%%%%
+
+\begin{jlcode}
+    ###JULIA_CODE_GOES_HERE###
+\end{jlcode}
+
+
+%%%%%%%%%%%%%%%%%%%
+% LaTeX interface %
+%%%%%%%%%%%%%%%%%%%
+
+\ProvideDocumentCommand{\jlunit}{O{-1} O{false} m}{\jlc{latexify_unitful(#3, #1, #2);}}
+\ProvideDocumentCommand{\jlnum}{O{-1} O{false} m}{\jlc{latexify_number(#3, #1, #2);}}
+\ProvideDocumentCommand{\jlSI}{O{-1} O{false} m m}{\jlc{latexify_number_and_unity(#3, raw"#4", #1, #2);}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TESTS TESTS TESTS TESTS TESTS %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+% \ExplSyntaxOn
+
+% \cs_new_protected:Nn \l_juliaunit_pgfplots_deps: {
+%     \RequirePackage{pgfplots}
+%     \pgfplotsset{compat=newest}
+%     \usepgfplotslibrary{groupplots}
+%     \usepgfplotslibrary{polar}
+%     \usepgfplotslibrary{smithchart}
+%     \usepgfplotslibrary{statistics}
+%     \usepgfplotslibrary{dateplot}
+%     \usetikzlibrary{arrows.meta}
+%     \usetikzlibrary{backgrounds}
+%     \usepgfplotslibrary{patchplots}
+%     \usepgfplotslibrary{fillbetween}
+%     \pgfplotsset{%
+%     layers/standard/.define layer set={%
+%         background,axis background,axis grid,axis ticks,axis lines,axis tick labels,pre main,main,axis descriptions,axis foreground%
+%     }{grid style= {/pgfplots/on layer=axis grid},%
+%         tick style= {/pgfplots/on layer=axis ticks},%
+%         axis line style= {/pgfplots/on layer=axis lines},%
+%         label style= {/pgfplots/on layer=axis descriptions},%
+%         legend style= {/pgfplots/on layer=axis descriptions},%
+%         title style= {/pgfplots/on layer=axis descriptions},%
+%         colorbar style= {/pgfplots/on layer=axis descriptions},%
+%         ticklabel style= {/pgfplots/on layer=axis tick labels},%
+%         axis background@ style={/pgfplots/on layer=axis background},%
+%         3d box foreground style={/pgfplots/on layer=axis foreground},%
+%         },
+%     }
+%     \jlc{using~Plots;pgfplotsx();Base.print(plt::Plots.Plot{Plots.PGFPlotsXBackend})=show(stdout,MIME("application/x-tex"),plt);}
+% }
+
+% \ProvideDocumentCommand{\usePGFPlotsX}{}{\l_juliaunit_pgfplots_deps:}
+
+
+
+% \ExplSyntaxOff
