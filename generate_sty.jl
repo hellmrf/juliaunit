@@ -1,3 +1,6 @@
+import Pkg;
+Pkg.add(["Unitful", "Latexify", "UnitfulLatexify", "Measurements"])
+
 """
 Bundles the two sides in a single file .sty that can be used with LaTeX.
 """
