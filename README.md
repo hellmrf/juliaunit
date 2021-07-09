@@ -16,44 +16,6 @@ You can:
 -   Choose the number of de![](../screenshots/example1.png)cimal places
 -   Force scientific notation
 
-## How to Use
-
-If you already have Julia and LaTeX installed and working, open up the REPL (running `julia` in a terminal) and execute the following.
-```julia
-import Pkg; Pkg.add(["Unitful", "Latexify", "UnitfulLatexify", "Measurements"])
-```
-It'll install some packages you need. After that, put `juliaunit.sty` in the same folder as your `.tex` file and compile with:
-
-```sh
-xelatex file.tex
-pythontex file.tex
-xelatex file.tex # again if needed
-```
-
-or any engine of your choice.
-
-### Using arara
-
-If you use [`arara`](https://ctan.org/pkg/arara), here are a possible compilation recipe (add these lines to your LaTeX code):
-
-```latex
-% arara: xelatex: {interaction: nonstopmode} if changed('tex') || !exists('pytxcode')
-% arara: pythontex
-% arara: xelatex: {interaction: nonstopmode}
-% arara: xelatex: {interaction: nonstopmode} if missing('pdf') || found('log', 'undefined references')
-```
-
-and compile with:
-
-```sh
-arara file.tex
-```
-
-Again, you can replace `xelatex` with any engine of your choice (see `arara`'s docs).
-
-### With `latexmk`
-
-PythonTeX also works with `latexmk`. Take a look at the section 4.6.1 of the [documentation](http://mirrors.ctan.org/macros/latex/contrib/pythontex/pythontex.pdf). However, you can just add [this](https://ctan.mirrors.hoobly.com/support/latexmk/example_rcfiles/pythontex-latexmkrc) to your `.latexmkrc` file (see examples).
 ## Examples
 
 ```latex
@@ -87,6 +49,47 @@ And the result:
 ![](screenshots/example1.png)
 
 For more information on Unitful.jl resources and facilities, take a look at the [documentation](https://painterqubits.github.io/Unitful.jl/stable/).
+
+## How to Use
+
+If you already have Julia and LaTeX installed and working, compile the .sty file with
+
+```shell
+julia generate_sty.jl
+```
+
+It'll install some packages and give you a `juliaunit.sty`. Put it in the same folder as your `.tex` file and compile with:
+
+```sh
+xelatex file.tex
+pythontex file.tex
+xelatex file.tex # again if needed
+```
+
+or any engine of your choice.
+
+### Using arara
+
+If you use [`arara`](https://ctan.org/pkg/arara), here are a possible compilation recipe (add these lines to your LaTeX code):
+
+```latex
+% arara: xelatex: {interaction: nonstopmode} if changed('tex') || !exists('pytxcode')
+% arara: pythontex
+% arara: xelatex: {interaction: nonstopmode}
+% arara: xelatex: {interaction: nonstopmode} if missing('pdf') || found('log', 'undefined references')
+```
+
+and compile with:
+
+```sh
+arara file.tex
+```
+
+Again, you can replace `xelatex` with any engine of your choice (see `arara`'s docs).
+
+### With `latexmk`
+
+PythonTeX also works with `latexmk`. Take a look at the section 4.6.1 of the [documentation](http://mirrors.ctan.org/macros/latex/contrib/pythontex/pythontex.pdf). You can also just add [this](https://ctan.mirrors.hoobly.com/support/latexmk/example_rcfiles/pythontex-latexmkrc) to your `.latexmkrc` file (see examples).
 
 ## How it works
 
