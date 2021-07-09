@@ -49,11 +49,11 @@ and compile with:
 arara file.tex
 ```
 
-Again, you can replace `xelatex` with any engine of your choice (see arara's docs).
+Again, you can replace `xelatex` with any engine of your choice (see `arara`'s docs).
 
 ### With `latexmk`
 
-PythonTeX also works with `latexmk`. Take a look at the section 4.6.1 of the [documentation](http://mirrors.ctan.org/macros/latex/contrib/pythontex/pythontex.pdf).
+PythonTeX also works with `latexmk`. Take a look at the section 4.6.1 of the [documentation](http://mirrors.ctan.org/macros/latex/contrib/pythontex/pythontex.pdf). However, you can just add [this](https://ctan.mirrors.hoobly.com/support/latexmk/example_rcfiles/pythontex-latexmkrc) to your `.latexmkrc` file (see examples).
 ## Examples
 
 ```latex
@@ -85,6 +85,8 @@ PythonTeX also works with `latexmk`. Take a look at the section 4.6.1 of the [do
 
 And the result:
 ![](screenshots/example1.png)
+
+For more information on Unitful.jl resources and facilities, take a look at the [documentation](https://painterqubits.github.io/Unitful.jl/stable/).
 
 ## How it works
 
