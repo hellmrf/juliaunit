@@ -1,0 +1,13 @@
+\documentclass{article}
+
+\usepackage{juliaunit}
+
+% The actual code will be ran from the pythontex-files-main folder. So code.jl is in the parent folder (which is the same as the .tex file).
+\begin{jlcode}
+    include("../code.jl");
+\end{jlcode}
+
+\begin{document}
+    Now I have access to all my variables in \texttt{code.jl}. 
+    For example, $ V = \jlunit[2]{V |> u"L"} $.
+\end{document}

@@ -1,0 +1,36 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{juliaunit}
+\usepackage{siunitx}   % Already loaded by juliaunit, but useful to get code completion.
+
+% The actual code will be ran from the pythontex-files-main folder. 
+% So code.jl is in the parent folder (which is the same as the .tex file).
+\begin{jlcode}
+    include("../code.jl");
+\end{jlcode}
+
+\begin{document}
+    \section*{Question 1}
+    Now I have access to all my variables in \texttt{code.jl}, where I put mostly my functions and other stuff. The actual variables for this questions goes anywhere here.
+    \begin{jlcode}
+        T = 298.0 * u"K";
+        P = 1u"bar";
+        n = 1u"mol";
+        V = n * R * T / P; # The R constant comes from code.jl!
+    \end{jlcode}
+    At the end,
+    \[ PV = nRT \iff V = \frac{nRT}{P} \implies V = \jlunit[2]{V |> u"L"}\;. \]
+    
+    \section*{Question 2}
+    \begin{jlcode}
+        MM = 28.0134u"g/mol"; # Molar Mass
+        m = 38u"g"; # Mass
+        T = -100u"°C" |> u"K"; # -100°C, but in Kelvin :)
+        P = 1u"atm";
+        n = m / MM;
+        V = n * R * T / P; # The R constant comes from code.jl!
+    \end{jlcode}
+    We have \SI{38}{\gram} of N$_2$. Considering the ideal behavior, the volume is, at $ \jlunit{T} $,
+    \[ PV = nRT \iff V = \frac{nRT}{P} \implies V = \jlunit[2]{V |> u"L"}\;. \]
+\end{document}

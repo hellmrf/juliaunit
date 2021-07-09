@@ -1,0 +1,18 @@
+\documentclass{article}
+
+\usepackage{juliaunit}
+\usepackage{siunitx}   % Already loaded by juliaunit, but useful to get code completion.
+
+\sisetup{output-decimal-marker={,}} % Use the comma as decimal separator.
+
+\begin{jlcode}
+    MM = 28.0134u"g/mol";
+    m = 38u"g";
+    T = -100u"°C" |> u"K";
+\end{jlcode}
+
+\begin{document}
+    We have $ \jlunit[2]{m / MM} $ of N$_2$. The temperature is $ \jlunit{T} $.
+
+    And that's it.
+\end{document}
