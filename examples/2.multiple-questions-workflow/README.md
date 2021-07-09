@@ -1,7 +1,9 @@
-# Other languages
+# "Multiple Questions" Workflow
 
-Em português e em diversos idiomas, como o alemão, o separador de decimais é a vírgula.
-Este exemplo mostra como isso pode ser configurado no pacote `siunitx`.
+Ao resolver uma série de exercícios semelhantes, é comum que as mesmas variáveis sejam utilizadas em questões diferentes e, logicamente, com valores diferentes.
+Nesse caso, não é viável utilizar o workflow "report", já que apenas a última aparição de cada variável se aplicaria a todas as questões.
+
+Este mini-projeto propõe um workflow para esse tipo de caso.
 
 ## Compilação
 
