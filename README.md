@@ -18,7 +18,11 @@ You can:
 
 ## How to Use
 
-If you already have Julia and LaTeX installed and working, put `juliaunit.sty` in the same folder as your `.tex` file. Then compile with:
+If you already have Julia and LaTeX installed and working, open up the REPL (running `julia` in a terminal) and execute the following.
+```julia
+import Pkg; Pkg.add(["Unitful", "Latexify", "UnitfulLatexify", "Measurements"])
+```
+It'll install some packages you need. After that, put `juliaunit.sty` in the same folder as your `.tex` file and compile with:
 
 ```sh
 xelatex file.tex
@@ -47,6 +51,9 @@ arara file.tex
 
 Again, you can replace `xelatex` with any engine of your choice (see arara's docs).
 
+### With `latexmk`
+
+PythonTeX also works with `latexmk`. Take a look at the section 4.6.1 of the [documentation](http://mirrors.ctan.org/macros/latex/contrib/pythontex/pythontex.pdf).
 ## Examples
 
 ```latex
