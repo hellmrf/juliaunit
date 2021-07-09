@@ -24,6 +24,6 @@ function main()
     open("./juliaunit.sty", "w") do io 
         write(io, sty)
     end;
-    @info "Generated ./src/juliaunit.sty"
+    @info "Generated ./juliaunit.sty"
 end
 main();
