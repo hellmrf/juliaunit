@@ -1,4 +1,4 @@
-using Unitful, Latexify, UnitfulLatexify
+using Unitful, Latexify, UnitfulLatexify, Measurements
 
 struct PreprocessingOptions 
     precision::Int
@@ -10,6 +10,28 @@ const OPTIONS = Dict{String,Union{Function,String}}(
     "scientific" => "scientific-notation=true"
 );
 
+
+# TODO: improve naming of this function
+# TODO: write docs
+function fix_Measurements_output(number::Measurement, sigdigits::Int=1)::Measurement 
+    io = IOBuffer();
+    print(IOContext(io, :error_digits => sigdigits), number);
+    str = String(take!(io));
+    return measurement(str);
+end
+
+# TODO: improve naming of this function
+# TODO: write docs
+function filter_input(number::Quantity, sigdigits::Int=1)::Quantity
+    current = number;
+    if typeof(number.val) <: Measurement
+        newval = fix_Measurements_output(number.val)
+        current = newval * unit(current);
+    end
+    return float(current)
+end
+filter_input(number::Measurement, a=nothing)::Measurement = fix_Measurements_output(number)
+filter_input(number::Number, a=nothing)::Float64 = float(number)
 
 """
 apply_options(str::String, command::String, options::PreprocessingOptions)::String
@@ -45,19 +67,25 @@ In LaTeX side, it's \\jlunit[<precision>][<scientific>]{<julia code>}.
 """
 function latexify_unitful(number::T, precision::Int=-1, scientific::Bool=false)::Nothing where T <: Quantity
     options = PreprocessingOptions(precision, scientific);
-    result = latexify(number, unitformat=:siunitx) |> String;
+    result = latexify(filter_input(number), unitformat=:siunitx) |> String;
+    result = replace(result, "±" => "\\pm"); # Measurements.jl
     result = apply_options(result, "\\SI", options);
     print(result);
 end
 
+function latexify_unitful(number::Number, precision::Int=-1, scientific::Bool=false)::Nothing
+    latexify_number(number, precision, scientific)
+end
+
 """
-    latexify_number(number::T, precision::Int=-1, scientific::Bool=false)::Nothing where T <: Quantity
+latexify_number(number::T, precision::Int=-1, scientific::Bool=false)::Nothing where T <: Quantity
 
 Converts a number to a LaTeX representation (with siunitx's \\num).
 In LaTeX side, it's \\jlnum[<precision>][<scientific>]{<julia code>}.
 """
 function latexify_number(number::Number, precision::Int=-1, scientific::Bool=false)::Nothing
-    result = apply_options("\\num{$number}", "\\num", PreprocessingOptions(precision, scientific));
+    result = apply_options("\\num{$(filter_input(number))}", "\\num", PreprocessingOptions(precision, scientific));
+    result = replace(result, "±" => "\\pm"); # Measurements.jl
     print(result);
 end
 
