@@ -30,13 +30,13 @@ or any engine of your choice.
 
 ### Using arara
 
-If you use [`arara`](https://ctan.org/pkg/arara), here a possible compilation recipe (add these lines to your LaTeX code):
+If you use [`arara`](https://ctan.org/pkg/arara), here are a possible compilation recipe (add these lines to your LaTeX code):
 
 ```latex
 % arara: xelatex: {interaction: nonstopmode} if changed('tex') || !exists('pytxcode')
 % arara: pythontex
 % arara: xelatex: {interaction: nonstopmode}
-% arara: xelatex: {interaction: nonstopmode} while missing('pdf') || found('log', 'undefined references')
+% arara: xelatex: {interaction: nonstopmode} if missing('pdf') || found('log', 'undefined references')
 ```
 
 and compile with:
@@ -64,11 +64,15 @@ Again, you can replace `xelatex` with any engine of your choice (see arara's doc
         V = n*R*T/P;
     \end{jlcode}
 
-    $ V = \jlunit{V} $, or, in the SI, $ V = \jlunit{V |> upreferred} $. Or maybe in liter, $ V = \jlunit{V |> u"L"} $.
+    $ V = \jlunit{V} $, or, in the SI, $ V = \jlunit{V |> upreferred} $. 
+    Or maybe in liter, $ V = \jlunit{V |> u"L"} $.
 
-    If you prefer to use less decimal places, you can just do $ V = \jlunit[2]{V |> u"L"} $. Or maybe you want to force scientific notation: $ V = \jlunit[2][true]{V |> upreferred} $.
+    If you prefer to use less decimal places, you can just do $ V = \jlunit[2]{V |> u"L"} $. 
+    Or maybe you want to force scientific notation: $ V = \jlunit[2][true]{V |> upreferred} $.
 
-    To force scientific notation and use all available decimal places, pass $ -1 $ to the first optional argument, like this $ V = \jlunit[-1][true]{V |> upreferred} $.
+    To force scientific notation and use all available decimal places, 
+    pass $ -1 $ to the first optional argument, like this:
+    $ V = \jlunit[-1][true]{V |> upreferred} $.
 \end{document}
 ```
 
