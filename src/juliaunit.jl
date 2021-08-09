@@ -88,6 +88,9 @@ function latexify_number(number::Number, precision::Int=-1, scientific::Bool=fal
     result = replace(result, "±" => "\\pm"); # Measurements.jl
     print(result);
 end
+function latexify_number(number::Quantity, precision::Int=-1, scientific::Bool=false)::Nothing
+    latexify_number(number.val, precision, scientific);
+end
 
 """
     latexify_number_and_unity(number::Number, unity::String, precision::Int=-1, scientific::Bool=false)::Nothing
