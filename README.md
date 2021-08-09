@@ -89,7 +89,7 @@ Again, you can replace `xelatex` with any engine of your choice (see `arara`'s d
 
 ### With `latexmk`
 
-PythonTeX also works with `latexmk`. Take a look at the section 4.6.1 of the [documentation](http://mirrors.ctan.org/macros/latex/contrib/pythontex/pythontex.pdf). You can also just add [this](https://ctan.mirrors.hoobly.com/support/latexmk/example_rcfiles/pythontex-latexmkrc) to your `.latexmkrc` file (see examples).
+PythonTeX also works with `latexmk`. Take a look at the section 4.6.1 of the [documentation](http://mirrors.ctan.org/macros/latex/contrib/pythontex/pythontex.pdf). You can also just add [this](https://mirrors.ctan.org/support/latexmk/example_rcfiles/pythontex-latexmkrc) to your `.latexmkrc` file (see examples).
 
 ## How it works
 
