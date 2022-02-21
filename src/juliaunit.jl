@@ -69,7 +69,7 @@ function latexify_unitful(number::T, precision::Int=-1, scientific::Bool=false):
     options = PreprocessingOptions(precision, scientific);
     result = latexify(filter_input(number), unitformat=:siunitx) |> String;
     result = replace(result, "±" => "\\pm"); # Measurements.jl
-    result = apply_options(result, "\\SI", options);
+    result = apply_options(result, "\\qty", options);
     print(result);
 end
 
@@ -99,7 +99,7 @@ Converts a number to a LaTeX representation together with an arbitrary unit (wit
 In LaTeX side, it's \\jlSI[<precision>][<scientific>]{<julia code>}{<siunitx's commands>}.
 """
 function latexify_number_and_unity(number::Number, unity::String, precision::Int=-1, scientific::Bool=false)::Nothing
-    result = apply_options("\\SI{$number}{$unity}", "\\SI", PreprocessingOptions(precision, scientific));
+    result = apply_options("\\qty{$number}{$unity}", "\\qty", PreprocessingOptions(precision, scientific));
     print(result);
 end
 
