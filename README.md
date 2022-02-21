@@ -16,6 +16,9 @@ You can:
 -   Choose the number of de![](../screenshots/example1.png)cimal places
 -   Force scientific notation
 
+Be aware:
+
+- `juliaunit` rely strongly on the amazing [`UnitfulLatexify.jl`](https://github.com/gustaphe/UnitfulLatexify.jl) package. That package was updated to use the the new version of `siunitx`, v3.0. Now, the command `\SI` was replaced bu `\qty`. For now, you'll have to update your `siunitx` package for the package to work. We're working on a way of establishing backward compatibility, but it may take some time.
 ## Examples
 
 ```latex
